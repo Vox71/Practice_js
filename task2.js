@@ -1,4 +1,4 @@
-class User_ids {
+class User {
   constructor(ID, name, age) {
     this.ID = ID;
     this.name = name;
@@ -10,12 +10,12 @@ class User_ids {
 }
 
 let userList = [
-  user1 = new User_ids(1, "Vladislav", 12),
-  user2 = new User_ids(2, "Oleg", 33),
-  user3 = new User_ids(13, "Danila", 44),
-  user4 = new User_ids(1337, "Kiril", 23),
-  user5 = new User_ids(3, "Reimu", 18),
-  user6 = new User_ids(4, "Marisa", 14)
+  user1 = new User(1, "Vladislav", 12),
+  user2 = new User(2, "Oleg", 33),
+  user3 = new User(13, "Danila", 44),
+  user4 = new User(1337, "Kiril", 23),
+  user5 = new User(3, "Reimu", 18),
+  user6 = new User(4, "Marisa", 14)
 ]
 
 function sleep(seconds) {
@@ -59,15 +59,15 @@ loadUsersInParallel = async (ID_list) => {
 
 var main = async () =>{ //создаем асинхронный main(), что бы можно было прописать await перед функциями с promise
   console.log(await getUser(1));  //Поиск одного пользователя с ID 1. 
-  //На выходе из промиса получаем объект класса User_ids
+  //На выходе из промиса получаем объект класса User
   
   let primeUsers = [1, 1337, 3];
 
   await loadUsersSquentially(primeUsers);//Поиск пользователей с ID, заданными в массиве primeUsers
-  //Почередно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив объектов класса User_ids
+  //Почередно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив объектов класса User
   
   await loadUsersInParallel(primeUsers);//Поиск пользователей с ID, заданными в массиве primeUsers
-  //Параллельно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив объектов класса User_ids
+  //Параллельно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив объектов класса User
 }
 
 main();
