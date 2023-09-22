@@ -5,13 +5,17 @@ class User_ids {
       this.age = age;
     }
     sayHi() {
-      alert(`Инфа о пользователе: ${this.ID}, ${this.name}, ${this.age}`);
+      console.log(`ID: ${this.ID} | Имя: + ${this.name} | Возраст: ${this.age}`);
     }
   }
 
 let userList = [
     user1 = new User_ids(1, "Vladislav", 12),
-    user2 = new User_ids(2, "Oleg", 33)
+    user2 = new User_ids(2, "Oleg", 33),
+    user3 = new User_ids(13, "Danila", 44),
+    user4 = new User_ids(1337, "Kiril", 23),
+    user5 = new User_ids(3, "Reimu", 18),
+    user6 = new User_ids(4, "Marisa", 14)
 ]
 
 function sleep(seconds) {
@@ -19,12 +23,55 @@ function sleep(seconds) {
 }
 
 getUser = async (ID_num) => {
-   await sleep(2);
-   return userList.find((element) => element.ID == ID_num);;
+   await sleep(1.3);
+   console.log('Загружен пользователь с ID ' + ID_num);
+   return userList.find((element) => element.ID == ID_num);
+   
+}
+
+loadUsersSquentially = async (ID_list) => {
+  const t0 = Date.now();
+  let loadedUsers = [];
+  for(let i = 0; i < ID_list.length; i++){
+    loadedUsers.push(await getUser(ID_list[i]));
+  }
+  console.log(`Пользователи загружены за ${(Date.now() - t0) /1000} секунд`);
+  await sleep(1);
+  console.log('Список пользователей:')
+  for(let i = 0; i < loadedUsers.length; i++){
+    loadedUsers[i].sayHi();
+  }
+  return loadedUsers;
+}
+
+loadUsersInParallel = async (ID_list) => {
+  const t0 = Date.now();
+  let loadedUsers = [];
+  const promises = Array(ID_list.length).fill(null).map((_, i) => getUser(ID_list[i]))
+  for (const p of promises){  
+    loadedUsers.push(await p);
+  }
+  console.log(`Пользователи загружены за ${(Date.now() - t0) /1000} секунд`);
+  await sleep(1);
+  console.log('Список пользователей:')
+  for(let i = 0; i < loadedUsers.length; i++){
+    loadedUsers[i].sayHi();
+  }
+  return loadedUsers;
+
 }
 
 var main = async () =>{
-  console.log(await getUser(1));
+  console.log(await getUser(1));  //Поиск одного пользователя с ID 1. 
+  //На выходе из промиса получаем объект класса User_ids
+  
+  let primeUsers = [1, 1337, 3];
+
+  console.log(await loadUsersSquentially(primeUsers));//Поиск пользователей с ID, заданными в массиве primeUsers
+  //Почередно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив 
+  
+  console.log(await loadUsersInParallel(primeUsers));//Поиск пользователей с ID, заданными в массиве primeUsers
+  //Параллельно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив 
 }
 
 
