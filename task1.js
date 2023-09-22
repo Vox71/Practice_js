@@ -7,10 +7,11 @@ class User {
   }
 
   sayHi() {
-    alert(`Инфа о пользователе: ${this.name}, ${this.age}, ${this.address}`);
+	console.log("Инфа о пользователе: " + this.name + " " + this.age + " " + this.address);
   }
   
 }
+
 
 function getTotalAge(list){
 	var totalAge = 0;
@@ -47,10 +48,10 @@ let Users = [
 
 
 var totalAge = getTotalAge(Users);
-alert(totalAge);
+console.log(totalAge);
 
 var usersStreets = getUsersStreets(Users);
-alert(usersStreets);
+console.log(usersStreets);
 
 var oldPeople = getOldPeople(Users);
 for(let i = 0; i < oldPeople.length; i++){
