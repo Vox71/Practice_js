@@ -23,7 +23,7 @@ function sleep(seconds) {
 }
 
 getUser = async (ID_num) => {
-   await sleep(1.3);
+   await sleep(3);
    console.log('Загружен пользователь с ID ' + ID_num);
    return userList.find((element) => element.ID == ID_num);
 }
@@ -46,7 +46,7 @@ loadUsersInParallel = async (ID_list) => {
   const t0 = Date.now();
   let loadedUsers = [];
   const promises = Array(ID_list.length).fill(null).map((_, i) => getUser(ID_list[i]))
-  for (const p of promises){  
+  for (const p of promises){
     loadedUsers.push(await p);
   }
   console.log(`Пользователи загружены за ${(Date.now() - t0) /1000} секунд`);
@@ -57,12 +57,12 @@ loadUsersInParallel = async (ID_list) => {
   return loadedUsers;
 }
 
-var main = async () =>{ //создаем асинхронный main(), что бы можно было прописать await перед функциями с promise
+let main = async () =>{ //создаем асинхронный main(), что бы можно было прописать await перед функциями с promise
+ 
   console.log(await getUser(1));  //Поиск одного пользователя с ID 1. 
   //На выходе из промиса получаем объект класса User
   
   let primeUsers = [1, 1337, 3];
-
   await loadUsersSquentially(primeUsers);//Поиск пользователей с ID, заданными в массиве primeUsers
   //Почередно запускаем getUser для каждого ID и записываем резолв из промиса в возвращаемый функцией массив объектов класса User
   
