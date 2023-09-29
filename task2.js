@@ -59,7 +59,7 @@ const loadUsersInParallel_remake = async (ID_list) => {
   const t1 = Date.now();
 
   const promises = ID_list.map((_, i) => getUser(ID_list[i]))
-  let loadedUsers = await Promise.all(promises);
+  const loadedUsers = await Promise.all(promises);
 
   console.log(`Пользователи загружены за ${(Date.now() - t1) /1000} секунд`);
   console.log('Список пользователей:');
