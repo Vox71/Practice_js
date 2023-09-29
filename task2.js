@@ -23,7 +23,7 @@ function sleep(seconds) {
 }
 
 getUser = async (ID_num) => {
-   await sleep(3);
+   await sleep(1);
    console.log('Загружен пользователь с ID ' + ID_num);
    return userList.find((element) => element.ID == ID_num);
 }
@@ -45,7 +45,7 @@ loadUsersSquentially = async (ID_list) => {
 loadUsersInParallel = async (ID_list) => {
   const t0 = Date.now();
   let loadedUsers = [];
-  const promises = Array(ID_list.length).fill(null).map((_, i) => getUser(ID_list[i]))
+  const promises = Array(ID_list.length).fill(null).map((_x, i) => getUser(ID_list[i]))
   for (const p of promises){
     loadedUsers.push(await p);
   }
