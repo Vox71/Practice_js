@@ -65,13 +65,13 @@ console.log(totalAge);*/
 /*getTotalAge проходится в цикле по всем объектам 
   в переданном массиве и суммирует Age*/
 
-var totalAge_test = getTotalAge_remake(Users); 
+const totalAge_test = getTotalAge_remake(Users); 
 console.log(totalAge_test);
 
 /*var usersStreets = getUsersStreets(Users); 
 console.log(usersStreets);*/
 
-var usersStreets_test = getUsersStreets_remake(Users); 
+const usersStreets_test = getUsersStreets_remake(Users); 
 console.log(usersStreets_test);
 /*getUserStreets в цикле записывает в возвращаемый 
   массив все названия улиц (находится в User.address[1])*/
@@ -81,7 +81,7 @@ for(let i = 0; i < oldPeople.length; i++){
 	oldPeople[i].getInfo();
 }*/
 
-var oldPeople_test = getOldPeople_remake(Users);
+const oldPeople_test = getOldPeople_remake(Users);
 oldPeople_test.forEach(element => element.getInfo())
 /*getOldPeople запускает цикл, в котором проверяются все объекты в 
 переданном массиве, и если .age > 60, то передает этот объект в вохвращаемый массив*/
