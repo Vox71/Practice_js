@@ -82,8 +82,6 @@ for(let i = 0; i < oldPeople.length; i++){
 }*/
 
 var oldPeople_test = getOldPeople_remake(Users);
-for(let i = 0; i < oldPeople_test.length; i++){
-	oldPeople_test[i].getInfo();
-}
+oldPeople_test.forEach(element => element.getInfo())
 /*getOldPeople запускает цикл, в котором проверяются все объекты в 
 переданном массиве, и если .age > 60, то передает этот объект в вохвращаемый массив*/

@@ -36,9 +36,8 @@ const loadUsersSquentially = async (ID_list) => {
   }
   console.log(`Пользователи загружены за ${(Date.now() - t0) /1000} секунд`);
   console.log('Список пользователей:');
-  for(let i = 0; i < loadedUsers.length; i++){
-    loadedUsers[i].getInfo();
-  }
+  loadedUsers.forEach(element => element.getInfo())
+
   return loadedUsers;
 }
 
@@ -57,10 +56,8 @@ const loadUsersSquentially = async (ID_list) => {
 
 const loadUsersInParallel_remake = async (ID_list) => {
   const t1 = Date.now();
-
   const promises = ID_list.map((_, i) => getUser(ID_list[i]))
   const loadedUsers = await Promise.all(promises);
-
   console.log(`Пользователи загружены за ${(Date.now() - t1) /1000} секунд`);
   console.log('Список пользователей:');
   loadedUsers.forEach(element => element.getInfo())
